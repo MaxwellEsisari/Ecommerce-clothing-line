@@ -1,0 +1,296 @@
+{% extends 'partials/main.html'%}
+{% block title %}homepage{% endblock %}
+{% block content %}
+{% load static %}
+
+
+<head>
+  <style>
+
+  .favorite-section {
+      margin-top: 40px;
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      padding: 10px;
+
+   }
+
+ .favorite-section .product-card {
+     flex: 0 0 25%;
+     margin-right: 40px;
+     border-radius: 4px;
+     overflow: hidden;
+     transition: transform 0.5s ease;
+
+ }
+
+ .favorite-section .product-card .card-body {
+     padding: 10px;
+     text-align: center;
+ }
+
+ .favorite-section .product-card img {
+     width: 100%;
+     height: auto;
+ }
+ 
+.icon-number-container {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    margin-top: 20px;
+}
+
+.icon-number-container svg {
+    margin-right: 5px; /* Add some space between the icon and the number */
+    margin-top: -13px;
+}
+.favorite-section .product-card h5 {
+        font-size: 0.8rem;
+    }
+
+.favorite-section .product-card p {
+    font-size: 0.675rem;
+}
+/* FAQ section styling */
+.faq-section {
+    margin-top: 100px;
+    background-color: #c8cace; /* Blue background color */
+    padding: 90px; /* Add padding for spacing */
+    border-radius: 5px;
+    text-align: center; /* Center child elements horizontally */
+}
+
+/* Frequently Asked Questions heading */
+.FAQs h2 {
+    color: #020202; /* Text color */
+    font-size: 24px; /* Font size */
+    margin-bottom: 20px;
+    padding: 10px 20px; /* Add padding for spacing */
+    text-transform: uppercase; /* Convert text to uppercase */
+}
+
+/* FAQ search form */
+.search-form {
+    display: inline-block; /* Display as inline-block */
+    text-align: left; /* Reset text alignment */
+}
+
+/* Search input field */
+.search-input {
+    padding: 20px; /* Add padding for spacing */
+    border: none; /* Remove default border */
+    border-radius: 40px; /* Add border radius for rounded corners */
+}
+
+/* Hover effect on search button */
+.search-button:hover {
+    background-color: #004080; /* Darker background color on hover */
+    transition: background-color 0.3s ease; /* Add smooth transition */
+}
+
+  </style>
+</head>
+<body>
+<div class="container">
+ <section>
+  <div class="intro-section">
+   <div class="intro-img">
+     
+     <img class="fit" src="{% static 'images/shoes-1433925_960_720.jpg' %}" height="auto">
+   </div>
+      <div class="intro-section-content">
+        <h3> Serving you with quality <span class="colored-text">Apparrells</span></h3>
+       <div class="nav__list-item">
+        <a class="nav__link" href="{% url 'add_products' %}">+</a>
+        <a href="{% url 'shop_here' %}" class="nav__link">Shop Here</a>
+      </div>  
+    </div>   
+  </div>
+</section>
+</div>
+
+<!-- Favorite section -->
+<div class="container">
+<h2 class="site-logo" style="margin-top: 100px;">Favorite Collections</h2>
+<div class="favorite-section">
+      <div class="slider-wrapper">
+        <div>
+          
+        </div>
+        <br>
+        <div class="slide-img">
+          <!-- Favorite items will be appended here by JavaScript -->
+        </div>
+      </div>
+  </div>
+</div>
+
+<!-- End of Favorite Section -->
+
+<!-- Frequently asked questions -->
+<section class="faq-section">
+  <div class="FAQs">
+      <h2>How can we help?</h2>
+      <form class="search-form">
+          <input type="text" class="search-input" placeholder="Search..."> 
+      </form> <br>
+  </div>
+</section>
+
+<!-- An end of FAQs -->
+
+<!-- pack-section -->
+<div class="pack-section">
+  <div class="pack-img">
+    <img src="{% static 'images/packnike.jpg' %}" alt="">
+  </div>
+  <div class="pack-img-content">
+      <h5>Modular packaging</h5>
+      <p>Unbox like never before</p>
+      <a class="nav__link" href="#">Read More...</a>
+  </div>
+  <div class="pack-img">
+    <img src="{% static 'images/packnike.jpg' %}" alt="">
+  </div>
+  <div class="pack-img-content">
+    <h5>Who we are</h5>
+    <p>Our journey explained</p>
+    <a class="nav__link" href="#">Read More...</a>
+</div>
+</div>
+   <!-- end ofpack-section -->
+
+
+  <!-- shoe care section -->
+
+  <div class="shoe-care-section">
+   <div class="container">
+    <div class="shoe-care-title">
+      <h3 class="site-logo"> Shoe Care</h3>
+   </div>
+    <div class="shoe-care-outline">
+     <div class="shoe-care-img">
+      <img src="{% static 'images/laundry2.jpg' %}" alt="">
+      <a class=href="#">
+        <h5 class="slide-img-title">Ndula laundry stores</h5>
+      </a> 
+      <p class="slide-img-para">Lets clean your shoes</p>
+     </div>
+    
+    <div class="shoe-care-img">
+      <img src="{% static 'images/laundryarea1.jpg' %}" alt="">
+         <a class=href="#">
+          <h5 class="slide-img-title">Who we are</h5>
+        </a> 
+      <p class="slide-img-para">Our journey explained</p>
+    </div>
+
+    </div>
+   </div>
+  </div>
+
+  <!-- this is the about section -->
+<!-- <div class="about-section" id="aboutSection">
+  <div class="container">
+    <div class="about-section-box">
+      <div class="abt-section">
+        <h3 class="slide-img-title" >About</h3>
+        <p class="slide-img-para" style="margin-top: 20px;">"Discover your style sanctuary amidst a symphony of 
+          threads and textures. Step into our stores,
+          where every garment whispers tales of elegance and individuality. 
+          Let your wardrobe tell your story."</p>
+      </div>
+      <div class="address-section">
+        <h3 class="slide-img-title" style="margin-left: 20px;">Location</h3>
+        <p class="slide-img-para" style="margin-left: 20px; margin-top: 20px;">Located: Ngong Road@ Adams BP</p>
+      </div>
+      <div class="info-section">
+        <h3 class="slide-img-title">Contacts</h3>
+        <div class="icon-number-container">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+            <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+          </svg>
+          <p class="slide-img-para">0781243511</p>
+        </div>
+      </div>
+      <div class="follow-section">
+        <h3 class="slide-img-title">Follow Us</h3>
+        <p class="slide-img-para">Connect with us on social media:</p>
+        <a href="https://www.facebook.com/profile.php?id=100067224277715" target="_blank" class="icon-link" style="color:rgb(33, 185, 223)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+            <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/westsidelooks/" target="_blank" class="icon-link" style="color:rgb(224, 42, 87)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<script>
+// JavaScript to toggle the visibility of the sticky div on scroll
+var aboutSection = document.getElementById('aboutSection');
+var lastScrollTop = 0;
+
+window.addEventListener('scroll', function() {
+  var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+  
+  if (currentScroll > lastScrollTop){
+    // Scrolling down
+    aboutSection.classList.add('hidden');
+  } else {
+    // Scrolling up
+    aboutSection.classList.remove('hidden');
+  }
+  lastScrollTop = currentScroll;
+});
+</script>
+   
+  <script src="{% static 'js/observers.js' %}"></script>
+  <!-- Your existing HTML content -->
+<!-- Function to add products to the favorites section -->
+<script>
+  function loadFavorites() {
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const favoriteSection = document.querySelector('.favorite-section');
+    favoriteSection.innerHTML = '';  // Clear previous contents
+
+    favorites.forEach((product, index) => {
+      const productCard = document.createElement('div');
+      productCard.classList.add('product-card');
+      productCard.innerHTML = `
+        <div class="card mb-4 shadow-sm">
+          <div class="image-container">
+            <img src="${product.image1}" class="card-img-top" alt="${product.name}">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">${product.name}</h5>
+            <p class="card-text">${product.description}</p>
+            <p class="card-text">${product.price}</p>
+            <button class="remove-btn" onclick="removeFromFavorites(${index})">X</button>
+          </div>
+        </div>
+      `;
+      favoriteSection.appendChild(productCard);
+    });
+  }
+
+  function removeFromFavorites(index) {
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    favorites.splice(index, 1);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    loadFavorites();
+  }
+
+  window.addEventListener('DOMContentLoaded', loadFavorites);
+</script>
+
+  </body>
+
+  {%endblock%}
+
