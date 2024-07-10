@@ -5,10 +5,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Product</title>
+    <title>{% if form.instance.pk %}Edit Product{% else %}Add New Product{% endif %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/add_products.css' %}">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
 
+        .card {
+            border-radius: 10px;
+        }
+        .card-title {
+            font-size: 1.5rem;
+            color: #343a40;
+        }
+        .name-input{
+            width: 94%;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+            margin-left: 50px;  
+                  
+        }
+        
+        .form-group label {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            display: block; 
+        }
+        .form-control, .form-select {
+            background-color: #f8f9fa;
+            margin-right: 45px;
+           
+        }
+        .description-textarea {
+            width: 94%;
+            height: 130px;
+        }
+      
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            padding: 0.5rem 5rem;
+            font-size: 1rem;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        img {
+            display: block;
+            margin-top: 0.5rem;
+            max-width: 100%;
+            border-radius: 5px;
+        }
+        .container {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        .text-center {
+            margin-top: 2rem;
+        }
+        .group-image{
+            background-color: #f8f9fa;
+            padding:10px 0px;
+            border-radius: 10px;
+            border: 1px solid #d3d8d8;
+            margin: 20px 10px;
+        }
+        .form-group-name{
+            background-color: #f8f9fa;
+            padding:0px;
+            border-radius: 10px;
+            border: 1px solid #d3d8d8;
+            margin: 20px 10px;
+            padding:10px 0px;
+
+        }
+        .form-group-quantity{
+            background-color: #f8f9fa;
+            padding:0px;
+            border-radius: 10px;
+            border: 1px solid #d3d8d8;
+            margin: 10px 10px;
+            padding:10px 0px;
+
+        }
+        .form-group-selling{
+            background-color: #f8f9fa;
+            padding:0px;
+            border-radius: 10px;
+            border: 1px solid #d3d8d8;
+            margin: 20px 10px;
+            padding:10px 0px;
+
+        }
+
+    </style>
 </head>
 <body>
 
@@ -19,61 +115,83 @@
             <div class="col-md-8">
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <h2 class="card-title text-center mb-4">Add New Product</h2>
-                        <div class="form-group">
-                            <label for="name">Product Name</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                        <h2 class="card-title text-center mb-4">{% if form.instance.pk %}Edit Product{% else %}Add New Product{% endif %}</h2>
+                        <div class="form-group-name">
+                                <div class="form-group name-input">
+                                    <label for="name">Product Name:</label>
+                                    {{ form.name }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="description" class="mb-0">Product Description:</label>
+                                    {{ form.description }}
+                                </div>
                         </div>
-                        <div class="form-group">
-                            <label for="description">Product Size</label>
-                            <input type="text" class="form-control" id="description" name="description" required>
+
+                        <div class="group-image">
+                                <div class="form-group">
+                                    <label for="image1">Product Images:</label>
+                                    {{ form.image1 }}
+                                    {% if form.instance.image1 %}
+                                        <img src="{{ form.instance.image1.url }}" alt="Image 1">
+                                    {% endif %}
+                                </div>
+                                <div class="form-group">
+                                    <!-- <label for="image2">Product Image 2: </label> -->
+                                    {{ form.image2 }}
+                                    {% if form.instance.image2 %}
+                                        <img src="{{ form.instance.image2.url }}" alt="Image sideview2">
+                                    {% endif %}
+                                </div>
+                                <!-- <div class="form-group">
+                                    {{ form.image3 }}
+                                    {% if form.instance.image3 %}
+                                        <img src="{{ form.instance.image3.url }}" alt="Image sideview3">
+                                    {% endif %}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.image4 }}
+                                    {% if form.instance.image4 %}
+                                        <img src="{{ form.instance.image4.url }}" alt="Image sideview4">
+                                    {% endif %}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.image5 }}
+                                    {% if form.instance.image5 %}
+                                        <img src="{{ form.instance.image5.url }}" alt="Image sideview5">
+                                    {% endif %}
+                                </div> -->
+
+                        
                         </div>
-                        <div class="form-group">
-                            <label for="image">Product Image 1</label>
-                            <input type="file" class="form-control" id="image1" name="image1" accept="image/*" required>
+                        <div class="form-group-quantity">
+                                    <div class="form-group">
+                                        <label for="quantity">Quantity</label>
+                                        {{ form.quantity }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="original_price">Original Price</label>
+                                        {{ form.original_price }}
+                                    </div>
                         </div>
-                        <br>
-                        <div class="form-group">
-                            <label for="image">Product Image 2</label>
-                            <input type="file" class="form-control" id="image2" name="image2" accept="image/*" required>
+                        <div class="form-group-selling">
+                                    <div class="form-group">
+                                        <label for="selling_price">Selling Price</label>
+                                        {{ form.selling_price }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="category">Category</label>
+                                        {{ form.category }}
+                                    </div>
                         </div>
-                        <div class="form-group">
-                            <label for="price">Price</label>
-                            <input type="number" class="form-control" id="price" name="price" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="category">Category</label>
-                            <select class="form-select" id="category" name="category" required>
-                                <option value="" selected disabled>Select category</option>
-                                <optgroup label="Men's Fashion">
-                                    <option value="Tops">Tops</option>
-                                    <option value="Bottoms">Bottoms</option>
-                                    <option value="Outwear">Outwear</option>
-                                    <option value="Accessories">Accessories</option>
-                                    <option value="Suits">Suits</option>
-                                    <option value="Footwear">Footwear</option>
-                                    <option value="Undergarments">Undergarments</option>
-                                </optgroup>
-                                <optgroup label="Women's Fashion">
-                                    <option value="Tops">Tops</option>
-                                    <option value="Bottoms">Bottoms</option>
-                                    <option value="Outwear">Outwear</option>
-                                    <option value="Accessories">Accessories</option>
-                                    <option value="Suits">Suits</option>
-                                    <option value="Footwear">Footwear</option>
-                                    <option value="Undergarments">Undergarments</option>
-                                </optgroup>
-                                <optgroup label="Kids Fashion">
-                                    <option value="Tops">Tops</option>
-                                    <option value="Bottoms">Bottoms</option>
-                                    <option value="Outwear">Outwear</option>
-                                    <option value="Accessories">Accessories</option>
-                                    <option value="Suits">Suits</option>
-                                    <option value="Footwear">Footwear</option>
-                                    <option value="Undergarments">Undergarments</option>
-                                </optgroup>
+                        <div class="form-group" style="margin: 0px 10px;">
+                            <label for="sizes" style="margin-left: 60px;">Sizes</label>
+                            <select id="sizes" name="sizes" class="form-control" multiple>
+                                {% for value, label in form.sizes.field.choices %}
+                                    <option value="{{ value }}" {% if value in form.sizes.value %}selected{% endif %}>{{ label }}</option>
+                                {% endfor %}
                             </select>
                         </div>
+                        
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
@@ -83,6 +201,23 @@
         </div>
     </div>
 </form>
+<script>
+    // Bootstrap requires the user to hold Ctrl (or Cmd on Mac) to select multiple options
+    // This script ensures multiple selections can be made more easily.
+    document.getElementById('sizes').addEventListener('mousedown', function (e) {
+        e.preventDefault();
 
+        var select = this;
+        var scroll = select.scrollTop;
+
+        e.target.selected = !e.target.selected;
+
+        setTimeout(function () {
+            select.scrollTop = scroll;
+        }, 0);
+
+        select.focus();
+    });
+</script>
 </body>
 </html>

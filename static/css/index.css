@@ -1,3 +1,4 @@
+
 body {
     margin: 0;
     font-family: "Poppins", sans-serif;
@@ -14,10 +15,24 @@ body {
   
   .site-logo {
     font-size: 1.5rem;
-    color: var(--textB);
+    color: white;
     text-decoration: none;
   }
-  
+  .delivery{
+    background-color: #da5b07;
+    display: flex;
+  }
+  .delivery h5{
+    margin-left: 40%;
+    font-size: 13px;
+    color: #f7f4f4;
+  }
+  .delivery h4{
+    margin-left: 35%;
+    font-size: 13px;
+    color: #f5f0f0;
+  }
+
   header {
     --textC:rgb(143, 140, 140);
     --text: #f4f4f4;
@@ -25,6 +40,7 @@ body {
     --text-inverse: #333;
     --background: transparent;
     position: fixed;
+    width: 100%;
     top: 0;
     left: 0;
     right: 0;
@@ -48,7 +64,7 @@ body {
   .nav__link {
     --spacing: 1em;
     text-decoration: none;
-    color: black;
+    color: rgb(252, 249, 249);
     display: inline-block;
     padding: calc(var(--spacing) / 2) var(--spacing);
     position: relative;
@@ -112,8 +128,7 @@ body {
  .nav-scrolled {
   --text: rgb(252, 245, 245);
   --text-inverse: #f4f4f4;
-  --background: white;
-  margin: 10px 50px 20px;
+  --background: #fff;
   padding: 20px;
   box-shadow: 0 3px 20px rgba(0, 0, 0, 0.2);
 }
@@ -152,19 +167,19 @@ header .menu .sub-menu ul li a{
 
 header .menu .menu-item-has-children:hover .sub-menu{
 
-margin-top: 0;
+margin-top: 1px;
 visibility: visible;
 opacity: 1;
 }
 
 header .menu .sub-menu.mega-menu{
   
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0%;
+  transform: translateX(-0%);
 }
 
 header .menu .sub-menu.mega-menu-column-4{
-  max-width: 1400px;
+  max-width: 1530px;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -177,6 +192,7 @@ header .menu .sub-menu.mega-menu-column-4 .list-item{
   padding: 0 15px;
 
 }
+
 .title{
   font-weight: normal;
   font-size: 16px;
@@ -206,38 +222,6 @@ header .menu .sub-menu.mega-menu-column-4 .list-item{
     font-size: 14px;
     color: rgb(10, 9, 9);
     transition: color 0.3s ease;
- }
-
-
-
-.intro-section{
-  display: flex;
-
-
-
-}
- .intro-img{
-   padding-bottom: 10px;
-   padding-top: 80px;
-   
- }
- .intro-section-content{
-   padding-top: 25%;
-   margin-left: 60px;
-   line-height: 10vh;
- }
- .intro-section-content h5{
-  font-size: 20px;
-  font-family: Noto Sans, sans-serif;
-  margin-left: 10px;
-  line-height: 4vh;
- }
-
-
-
- .intro-section-content h3{
-  margin-left: 10px;
-  font-family: Optima, sans-serif;
  }
 
  .newarrivals-section{
@@ -301,18 +285,6 @@ header .menu .sub-menu.mega-menu-column-4 .list-item{
 }
 
 
- .pack-img-content p{
-  font-weight: normal;
-  font-size: 14px;
-  font-family: Noto Sans, sans-serif;
-  line-height: 3vh;
-  margin-left: 16px;
- }
- .pack-img-content a{
-  font-weight: normal;
-  font-size: 14px;
-  
- }
 
  
 .shoe-care-section{
@@ -334,34 +306,7 @@ header .menu .sub-menu.mega-menu-column-4 .list-item{
  
   
 }
- .about-section {
-      position: fixed;
-      bottom: 0;
-      bottom: 20px;
-      left: 50%;
-      width: 100%;
-      z-index: 1000;
-      transform: translateX(-50%);
-      animation: slideUp 0.5s ease forwards;
-      opacity: .5;
-      background-color: rgba(228, 228, 217, 0.8); /* Transparent background */
-    }
-.about-section-box {
-  display: flex;
-  align-items: stretch;
-}
-
-
-.hidden {
-  display: none;
-}
-
-.abt-section,
-.address-section,
-.info-section,
-.follow-section {
-  width: 25%;
-}
+ 
 
 .slide-img-title {
   font-size: 18px; /* Reduced font size */
@@ -380,9 +325,14 @@ header .menu .sub-menu.mega-menu-column-4 .list-item{
   margin-top: 16px; /* Reduced margin */
 }
 
-.slide-img-title,
+.slide-img-title{
+  color: #e7f1f1;
+
+
+}
 .slide-img-para {
-  color: #2a3131;
+  color: #e7f1f1;
+  font-size: 13px;
 }
 .slide-img{
   width: 100%;
@@ -423,3 +373,4 @@ header .menu .sub-menu.mega-menu-column-4 .list-item{
      width: 100%;
    }
  }
+ 

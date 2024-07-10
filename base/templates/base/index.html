@@ -6,15 +6,13 @@
 
 <head>
   <style>
-
-  .favorite-section {
-      margin-top: 40px;
-      display: flex;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      padding: 10px;
-
-   }
+ .favorite-section {
+ margin-top: 40px;
+ display: flex;
+ flex-wrap: nowrap;
+ overflow-x: auto;
+ padding: 10px;
+ }
 
  .favorite-section .product-card {
      flex: 0 0 25%;
@@ -52,115 +50,520 @@
 .favorite-section .product-card p {
     font-size: 0.675rem;
 }
-/* FAQ section styling */
-.faq-section {
+.video-section {
+    position: relative;
+    height: 100vh; /* Adjust height to 100vh */
+    overflow: hidden;
+}
+
+.video-background {
+    position: absolute; /* Change to fixed position */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto; /* Adjust to maintain aspect ratio */
+    min-height: 100vh; /* Ensure video covers entire height */
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    z-index: -1;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Adjust height to 100vh */
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    color: white;
+    margin-left: 50px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+} 
+
+/* Responsive typography */
+@media screen and (min-width: 1120px) {
+  :root {
+    --h2-font-size: 1.5rem;
+    --small-font-size: .875rem;
+  }
+}
+
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  
+}
+
+.containers {
+  display: grid;
+  place-items: center;
+  margin-inline: 1.5rem;
+  padding-block: 5rem;
+}
+
+.card__container {
+  display: grid;
+  row-gap: 3.5rem;
+  
+}
+
+.card__article {
+  position: relative;
+  overflow: hidden;
+}
+
+.card__img {
+  width: 328px;
+  border-radius: 1.5rem;
+}
+
+.card__data {
+  width: 280px;
+  background-color: var(--container-color);
+  padding: 1.5rem 2rem;
+  box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+  border-radius: 1rem;
+  position: absolute;
+  bottom: -9rem;
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  opacity: 0;
+  transition: opacity 1s 1s;
+}
+
+.card__description {
+  display: block;
+  font-size: var(--small-font-size);
+  margin-bottom: .25rem;
+}
+
+.card__title {
+  font-size: var(--h2-font-size);
+  font-weight: 500;
+  color: var(--title-color);
+  margin-bottom: .75rem;
+}
+
+.card__button {
+  text-decoration: none;
+  font-size: var(--small-font-size);
+  font-weight: 500;
+  color: var(--first-color);
+}
+
+.card__button:hover {
+  text-decoration: underline;
+}
+
+/* Naming animations in hover */
+.card__article:hover .card__data {
+  animation: show-data 1s forwards;
+  opacity: 1;
+  transition: opacity .3s;
+}
+
+.card__article:hover {
+  animation: remove-overflow 2s forwards;
+}
+
+.card__article:not(:hover) {
+  animation: show-overflow 2s forwards;
+}
+
+.card__article:not(:hover) .card__data {
+  animation: remove-data 1s forwards;
+}
+
+/* Card animation */
+@keyframes show-data {
+  50% {
+    transform: translateY(-10rem);
+  }
+  100% {
+    transform: translateY(-7rem);
+  }
+}
+
+@keyframes remove-overflow {
+  to {
+    overflow: initial;
+  }
+}
+
+@keyframes remove-data {
+  0% {
+    transform: translateY(-7rem);
+  }
+  50% {
+    transform: translateY(-10rem);
+  }
+  100% {
+    transform: translateY(.5rem);
+  }
+}
+
+@keyframes show-overflow {
+  0% {
+    overflow: initial;
+    pointer-events: none;
+  }
+  50% {
+    overflow: hidden;
+  }
+}
+
+
+@media screen and (max-width: 340px) {
+  .container {
+    margin-inline: 1rem;
+  }
+
+  .card__data {
+    width: 250px;
+    padding: 1rem;
+  }
+}
+
+/* For medium devices */
+@media screen and (min-width: 768px) {
+  .card__container {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 1.5rem;
+  }
+}
+
+/* For large devices */
+@media screen and (min-width: 1120px) {
+  .container {
+    height: 100vh;
+  }
+
+  .card__container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .card__img {
+    width: 348px;
+  }
+  .card__data {
+    background-color: #f0f2f5;
+    width: 316px;
+    padding-inline: 2.5rem;
+  }
+}
+.about-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+.about-card-container {
+    position: relative;
+    margin: 20px 10%;
+}
+
+.about-card {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 20px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: Arial, sans-serif;
+    width: 100%;
+    flex-direction: column; /* Change to column layout */
+}
+
+ .card1 h2 {
+    display: block; /* Ensures h2 uses default block layout */
+    text-align: center; /* Center text within h2 */
+    margin-bottom: 10px; /* Reset margins for h2 */
+    padding: 10px; /* Reset padding for h2 */
+    font-size: 28px; /* Adjust font size for h2 */
+}
+
+ .card1 p {
+    display: block; /* Ensures p uses default block layout */
+    text-align: center; /* Center text within p */
+    margin-bottom: 15px; /* Reset margins for p */
+    padding: 0; /* Reset padding for p */
+    font-size: 15px; /* Adjust font size for p */
+}
+.card1 {
     margin-top: 100px;
-    background-color: #c8cace; /* Blue background color */
-    padding: 90px; /* Add padding for spacing */
+    height: 450px; /* Height of Card 1 */
+    width: 450px;
+    color: #151616;
+    background-color:#fff;
+    z-index: 2;
+}
+
+
+.card2 {
+    background-color: #f0f0f0;
+    width: 1000px;
+    color: white;
+    height: 600px; /* Height of Card 2 */
+    z-index: 1;
+}
+
+/* Position the containers to create the overlapping effect */
+.card1-container {
+    position: absolute;
+    top: 50px;
+    left: 30px;
+}
+
+.card2-container {
+    position: absolute;
+    top: 100px;
+    left: 150px;
+}
+.footer-section{
+  height: 80vh;
+  background-color: #090d16;
+}
+.footer-section-box{
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+.subscribe-section {
+    text-align: center;
+    width: 70%; /* Adjust the width as needed */
+    height: 30px;
+    margin: 0 auto; /* Center the form horizontally */
+}
+
+.subscribe-section form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.subscribe-section input[type="email"] {
+    width: 50%; /* Adjust the width as needed */
+    padding: 10px;
+    height: 70px;
     border-radius: 5px;
-    text-align: center; /* Center child elements horizontally */
+    margin: 10px;
 }
 
-/* Frequently Asked Questions heading */
-.FAQs h2 {
-    color: #020202; /* Text color */
-    font-size: 24px; /* Font size */
-    margin-bottom: 20px;
-    padding: 10px 20px; /* Add padding for spacing */
-    text-transform: uppercase; /* Convert text to uppercase */
+.subscribe-section button {
+    padding: 10px 20px;
+    background-color: rgb(33, 185, 223);
+    color: white;
+    height: 70px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
-/* FAQ search form */
-.search-form {
-    display: inline-block; /* Display as inline-block */
-    text-align: left; /* Reset text alignment */
+.subscribe-section button:hover {
+    background-color: rgb(23, 165, 203);
+}
+.glow-button {
+    display: inline-block;
+    border: 1px solid rgb(247, 243, 243);
+    border-radius: 40px;
+    color: #f3f0f0;
+    padding: 15px 40px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Search input field */
-.search-input {
-    padding: 20px; /* Add padding for spacing */
-    border: none; /* Remove default border */
-    border-radius: 40px; /* Add border radius for rounded corners */
+.glow-button:hover {
+    background-color: #f3f0f0;
+    color: #333; 
+    box-shadow: 0 0 20px rgba(243, 240, 240, 0.8); /* Adjust the glow effect */
 }
 
-/* Hover effect on search button */
-.search-button:hover {
-    background-color: #004080; /* Darker background color on hover */
-    transition: background-color 0.3s ease; /* Add smooth transition */
-}
+@keyframes reveal-text {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .reveal-text {
+    animation: reveal-text 4s ease-out forwards;
+  }
+  .animated-text{
+    font-size: 34px;
+    font-weight: 600;
+    min-width: 280px;
+  }
+  input{
+    padding: 20px 20px;
+    border: 3px solid white;
+    color: white;
+    text-indent: 15px;
+    border-radius: 10px;
+    outline: none;
+    background: none;
+    border: rgb(243, 239, 239);
+    border-width: 1px;
+    letter-spacing: 3px;
+    transition: .3s;
+    margin-left: 250px;
+    box-shadow:0 0 15px rgb(250, 250, 249),
+               0 0 15px rgb(255, 166, 0);
+    border:0 0 15px rgb(255, 166, 0);
+
+  }
+  input:focus{
+    padding: 25px 25px;
+    width: 700px;
+    box-shadow:0 0 15px rgb(250, 250, 249),
+               0 0 15px rgb(255, 166, 0);
+    border:0 0 15px rgb(255, 166, 0);
+  }
+  input::placeholder {
+    color: grey;
+  }
+  
 
   </style>
 </head>
 <body>
-<div class="container">
- <section>
-  <div class="intro-section">
-   <div class="intro-img">
-     
-     <img class="fit" src="{% static 'images/shoes-1433925_960_720.jpg' %}" height="auto">
-   </div>
+  <div class="page-container">
+  <!-- <section>
+    <div class="intro-section">
+      <div class="blurred-background"></div>
       <div class="intro-section-content">
-        <h3> Serving you with quality <span class="colored-text">Apparrells</span></h3>
-       <div class="nav__list-item">
-        <a class="nav__link" href="{% url 'add_products' %}">+</a>
-        <a href="{% url 'shop_here' %}" class="nav__link">Shop Here</a>
-      </div>  
-    </div>   
+        <h3 style="font-size: 45px; padding-bottom: 25px;">Serving you with quality <span class="colored-text">Apparrells</span></h3>
+        <div class="nav__list-item">
+          <a class="nav__link" href="{% url 'add_products' %}">+</a>
+          <a href="{% url 'shop_here' %}"  style="border: 1px solid rgb(247, 243, 243); border-radius: 40px; color: #f3f0f0; padding: 15px 40px ; ">Shop Here</a>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+
+<!-- background intro video -->
+ 
+<section id="video-section" class="video-section reveal-text">
+  
+  <video autoplay muted loop class="video-background">
+      <source src="{% static 'videos/west2.mp4' %}" type="video/mp4">
+      Your browser does not support the video tag.
+  </video>
+
+  <div class="overlay"></div>
+
+  <div class="content">
+      <div class="reveal-text">
+        <div class="animated-text">
+          <h1 style="padding-bottom: 15px; font-size: 2em; font-weight: bold;">Welcome to <br> Our Stores</h1>
+           <!-- For <span ></span> -->
+           <h1 style="font-size: .8em;">Get quality apparrells at <br> an affordable price</h1> 
+        </div>
+          <a href="{% url 'shop_here' %}" style="margin-top: 20px;" class="glow-button">Shop Here</a>
+      </div> 
+        
+      <div class="search-box">
+        <h1 style="margin-left: 250px;font-size:25px">How can we Help you?</h1> <br>
+        <input style="border: 1px solid rgb(240, 238, 235); width: 500px;" type="text"  name="" placeholder="Search here!">
+    </div> 
+      
   </div>
+  
 </section>
+
+<!-- End  -->
+
+<!-- Arrivals -->
+<div class="containers">
+<div class="card__container">
+  <article class="card__article">
+    <img src="{% static 'images/fav5.webp' %}" alt="image" class="card__img">
+
+     <div class="card__data">
+        <span class="card__description">This is on a weekly basis</span>
+        <h2 class="card__title">Mens New Arrival</h2>
+        <a href="#" class="card__button">check collection</a>
+     </div>
+  </article>
+
+  <article class="card__article">
+    <img src="{% static 'images/fav5.webp' %}" alt="image" class="card__img">
+
+     <div class="card__data">
+        <span class="card__description">This is on a weekly basis</span>
+        <h2 class="card__title">Womens New Arrival</h2>
+        <a href="#" class="card__button">check collection</a>
+     </div>
+  </article>
+
+  <article class="card__article">
+    <img src="{% static 'images/fav5.webp' %}" alt="image" class="card__img">
+
+     <div class="card__data">
+        <span class="card__description">This is on a weekly basis</span>
+        <h2 class="card__title">Kids New Arrival</h2>
+        <a href="#" class="card__button">check collection</a>
+     </div>
+  </article>
 </div>
+</div>
+<!-- end -->
+
+
+<!-- About -->
+<div class="about-container">
+  <div class="about-card-container card1-container">
+      <div class="about-card card1">       
+        <h2>About</h2>
+        <P>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+           Sapiente corporis fuga,
+           iure cupiditate ut voluptatem enim laboriosam modi amet facere.</P>
+      </div>
+  </div>
+  <div class="about-card-container card2-container">
+      <div class="about-card card2">
+        <img src="{% static 'images/fav5.webp' %}" alt="image" class="card__img">
+      </div>
+
+  </div>
+</div>
+<!-- end -->
 
 <!-- Favorite section -->
 <div class="container">
-<h2 class="site-logo" style="margin-top: 100px;">Favorite Collections</h2>
-<div class="favorite-section">
-      <div class="slider-wrapper">
-        <div>
-          
+  <h2 class="site-logo" style="margin-top: 100px;">Favorite Collections</h2>
+  <div class="favorite-section">
+        <div class="slider-wrapper">
+          <div>
+            
+          </div>
+          <br>
+          <div class="slide-img">
+            <!-- Favorite items will be appended here by JavaScript -->
+          </div>
         </div>
-        <br>
-        <div class="slide-img">
-          <!-- Favorite items will be appended here by JavaScript -->
-        </div>
-      </div>
+    </div>
   </div>
-</div>
-
-<!-- End of Favorite Section -->
-
-<!-- Frequently asked questions -->
-<section class="faq-section">
-  <div class="FAQs">
-      <h2>How can we help?</h2>
-      <form class="search-form">
-          <input type="text" class="search-input" placeholder="Search..."> 
-      </form> <br>
-  </div>
-</section>
-
-<!-- An end of FAQs -->
-
-<!-- pack-section -->
-<div class="pack-section">
-  <div class="pack-img">
-    <img src="{% static 'images/packnike.jpg' %}" alt="">
-  </div>
-  <div class="pack-img-content">
-      <h5>Modular packaging</h5>
-      <p>Unbox like never before</p>
-      <a class="nav__link" href="#">Read More...</a>
-  </div>
-  <div class="pack-img">
-    <img src="{% static 'images/packnike.jpg' %}" alt="">
-  </div>
-  <div class="pack-img-content">
-    <h5>Who we are</h5>
-    <p>Our journey explained</p>
-    <a class="nav__link" href="#">Read More...</a>
-</div>
-</div>
-   <!-- end ofpack-section -->
-
+  
+  <!-- End of Favorite Section -->
 
   <!-- shoe care section -->
 
@@ -190,28 +593,42 @@
    </div>
   </div>
 
-  <!-- this is the about section -->
-<!-- <div class="about-section" id="aboutSection">
-  <div class="container">
-    <div class="about-section-box">
+  <!-- this is the footer section -->
+<div class="footer-section" > 
+    <div class="footer-section-box">
       <div class="abt-section">
-        <h3 class="slide-img-title" >About</h3>
-        <p class="slide-img-para" style="margin-top: 20px;">"Discover your style sanctuary amidst a symphony of 
-          threads and textures. Step into our stores,
-          where every garment whispers tales of elegance and individuality. 
-          Let your wardrobe tell your story."</p>
+        <h3 class="slide-img-title" >Customer Care</h3>
+        <p class="slide-img-para" style="margin-top: 20px;">Contact</p>
+        <p class="slide-img-para" style="margin-top: 10px;">Delivery</p>
+        <p class="slide-img-para" style="margin-top: 10px;">Size Guide</p>
+        <p class="slide-img-para" style="margin-top: 10px;">Returns</p>
+        <p class="slide-img-para" style="margin-top: 10px;">Afterpay</p>
+        <!-- Show logout link if user is authenticated -->
+        <p class="slide-img-para" style="margin-top: 10px;">
+          <a href="{% url 'logout' %}" title="Logout" style="color: rgb(250, 243, 243); display: flex; align-items: center;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
+              <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+            </svg>
+            Logout
+          </a>
+        </p>
+
+
+     
+
       </div>
       <div class="address-section">
-        <h3 class="slide-img-title" style="margin-left: 20px;">Location</h3>
-        <p class="slide-img-para" style="margin-left: 20px; margin-top: 20px;">Located: Ngong Road@ Adams BP</p>
+        <h3 class="slide-img-title" style="margin-left: 20px;">Information</h3>
+        <p class="slide-img-para" style="margin-left: 20px; margin-top: 20px;">Terms & Conditions</p>
+        <p class="slide-img-para" style="margin-left: 20px; margin-top: 20px;">Privacy Policy</p>
+
       </div>
       <div class="info-section">
-        <h3 class="slide-img-title">Contacts</h3>
+        <h3 class="slide-img-title">Locations</h3>
         <div class="icon-number-container">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
-            <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
-          </svg>
-          <p class="slide-img-para">0781243511</p>
+          <p class="slide-img-para" style="margin-top: 20px;">Located: Ngong Road@ Adams BP</p>
+
         </div>
       </div>
       <div class="follow-section">
@@ -229,27 +646,19 @@
         </a>
       </div>
     </div>
+    <!-- Other sections -->
+    <div class="subscribe-section">
+      <h3 class="slide-img-title" style="color: white;">Subscribe</h3>
+      <form action="/subscribe" method="post">
+          <input type="email" name="email" placeholder="Your email" required>
+          <button type="submit">Subscribe</button>
+      </form>
+
   </div>
-</div> -->
+  </div>
+</div> 
 
-<script>
-// JavaScript to toggle the visibility of the sticky div on scroll
-var aboutSection = document.getElementById('aboutSection');
-var lastScrollTop = 0;
 
-window.addEventListener('scroll', function() {
-  var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-  
-  if (currentScroll > lastScrollTop){
-    // Scrolling down
-    aboutSection.classList.add('hidden');
-  } else {
-    // Scrolling up
-    aboutSection.classList.remove('hidden');
-  }
-  lastScrollTop = currentScroll;
-});
-</script>
    
   <script src="{% static 'js/observers.js' %}"></script>
   <!-- Your existing HTML content -->
@@ -289,6 +698,10 @@ window.addEventListener('scroll', function() {
 
   window.addEventListener('DOMContentLoaded', loadFavorites);
 </script>
+<script>
+  gsap.from(".animated-text", {duration: 2, x: -100, opacity: 0, ease: "power2.out"});
+</script>
+
 
   </body>
 

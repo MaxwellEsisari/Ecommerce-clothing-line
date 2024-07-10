@@ -1,22 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Cart</title>
-</head>
-<body>
-    <h1>Your Cart</h1>
-    <ul>
-        {% for item in cart.cartitem_set.all %}
-            <li>{{ item.product.name }} - Quantity: {{ item.quantity }}</li>
-        {% empty %}
-            <li>Your cart is empty.</li>
-        {% endfor %}
+{% block content %}
+  <h2>Your Cart</h2>
+  {% if cart_items %}
+    <ul class="list-group">
+      {% for item in cart_items %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div class="cart-item-details">
+            <img src="{{ item.product.image1.url }}" alt="{{ item.product.name }}" class="img-thumbnail" style="width: 50px; height: 50px; margin-right: 10px;">
+            <div>
+              <p class="mb-1"><strong>{{ item.product.name }}</strong></p>
+              <p class="mb-1">Size: {{ item.size }}</p>
+              <p class="mb-1">Quantity: {{ item.quantity }}</p>
+              <p class="mb-1">Price: Ksh {{ item.product.selling_price }}</p>
+            </div>
+          </div>
+          <form method="post" action="{% url 'remove_from_cart' item.product.id %}" class="ml-auto">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Remove one</button>
+          </form>
+        </li>
+      {% endfor %}
     </ul>
-    <!-- You can add more HTML and styling as needed -->
-
-
-</body>
-</html>
-
+    <div class="mt-3">
+      <p class="h5">Total Price: Ksh {{ total_price }}</p>
+      <a href="{% url 'checkout' %}" class="btn btn-success">Proceed to Checkout</a>
+    </div>
+  {% else %}
+    <p>Your cart is empty.</p>
+  {% endif %}
+{% endblock %}

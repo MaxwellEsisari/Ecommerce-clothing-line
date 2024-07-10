@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Navbar Example</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .top-navbar {
+            background-color: #626768;
+            padding: 5px 40px;
+            padding-top: 10px;
+           
+            
+        }
+        .navbar-message {
+            overflow: hidden;
+            position: relative;
+            height: 24px; /* Adjust the height to match the font-size */
+        }
+        .navbar-message p {
+            margin: 0;
+            display: inline-block;
+            font-size: 14px;
+            color: #babcbe;
+            opacity: 0;
+            animation: slideText 16s infinite;
+            white-space: nowrap; /* Prevent wrapping */
+            position: absolute; /* Position absolute to overlay */
+            left: 0; /* Stick to the left */
+            margin-left: 610px;
+            font-weight: bold;
+            top: 0; /* Start from the top of the parent */
+        }
+        
+        .navbar-message p:nth-child(1) {
+            animation-delay: 0s;
+        }
+        .navbar-message p:nth-child(2) {
+            animation-delay: 4s;
+        }
+        .navbar-message p:nth-child(3) {
+            animation-delay: 8s;
+        }
+        .navbar-message p:nth-child(4) {
+            animation-delay: 12s;
+        }
+        @keyframes slideText {
+            0%, 25% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            30%, 100% {
+                opacity: 0;
+                transform: translateY(-100%);
+            }
+        }
+        .hidden {
+            display: none; /* or visibility: hidden; */
+        }
+        .chat-left-dots:hover {
+            cursor: pointer;
+        }
+        .flag-container {
+            margin-top: 5px;
+            float: right;
+            margin-right: 80px;
+        }
+        .flag-container img {
+            width: 20px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-navbar">
+        <div class="navbar-message">
+            <p>Shipping is done within 48 hours of order</p>
+            <p>Free returns within 30 days</p>
+            <p>24/7 customer support</p>
+            <p>Sign up for exclusive offers</p>
+
+            <a href="{%url 'login' %}" style="color: rgb(165, 161, 161);text-decoration: none; font-size: 14px; margin-left: 1240px;">| &nbsp;
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-dots" viewBox="0 0 16 16" style="color: rgb(165, 161, 161); margin-right: 6px; ">
+                <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+              </svg>Help
+              </a>
+            
+
+                <div class="flag-container">
+                    <img id="country-flag" src="" alt="Country Flag" class="hidden">
+                </div>
+
+        </div>
+        
+    </div>
+    <script>
+        async function fetchLocation() {
+            try {
+                let url = 'https://ipinfo.io/json?token=b39eeaa0c29549';
+                let response = await fetch(url);
+                let data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error fetching location:', error);
+            }
+        }
+
+        async function displayFlag() {
+            let locationData = await fetchLocation();
+            if (locationData) {
+                let countryCode = locationData.country.toLowerCase();
+                let flagUrl = `https://flagcdn.com/40x30/${countryCode}.png`; // Using Flag CDN to get the flag image
+                let flagImg = document.getElementById('country-flag');
+                flagImg.src = flagUrl;
+                flagImg.classList.remove('hidden');
+            }
+        }
+
+        displayFlag();
+    </script>
+    <!-- <script>
+        async function fetchText(){
+            let url = 'https://ipinfo.io/json?token=b39eeaa0c29549'
+            let response = await fetch(url)
+            let data = await response.json()
+            console.log(data)
+
+        }
+        fetchText() -->
+    <!-- </script> -->
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

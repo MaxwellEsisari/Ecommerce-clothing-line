@@ -1,0 +1,50 @@
+{% extends "partials/sidebar.html" %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<style>
+.card-order{
+    margin-top: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px 20px;
+    width: 850px;
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+}
+</style>
+
+<h1>Dashboard</h1>
+<div class="card-container">
+    <div class="card">
+        <h2 style="margin-top: 30px;">Total User</h2>
+        <p style="font-size: 25px;">{{ user_count }}</p>
+    </div>
+    <div class="card">
+        <h2 style="margin-top: 30px;">Total Customer</h2>
+        <p style="font-size: 25px;">{{ user_count }}</p>
+
+    </div>
+    <div class="card">
+        <h2 style="margin-top: 30px;">Paid Orders</h2>
+        <p style="font-size: 25px;">{{ user_count }}</p>
+    </div>
+    <div class="card">
+        <h2 style="margin-top: 30px;">Total Income</h2>
+        <p style="font-size: 25px;">ksh {{ user_count }}</p>
+    </div>
+    
+</div>
+<div class="card-order">
+    <h2 style="margin-top: 30px;">Latest Order</h2>
+    <!-- <p style="font-size: 25px;">ksh {{ user_count }}</p> -->
+</div>
+<div class="card-customers">
+    <h2 style="margin-top: 30px;">Latest Order</h2>
+    <!-- <p style="font-size: 25px;">ksh {{ user_count }}</p> -->
+</div>
+{% endblock %}

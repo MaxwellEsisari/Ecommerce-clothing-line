@@ -1,73 +1,349 @@
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Detail</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <style>
-        
-        
-        .product-image {
-            display: inline-block;
-            vertical-align: top; /* Align the top of the image with the top of the Add to Cart button */
+         body {
+            overflow-x: hidden;
+            margin-left: 20px; /* Added margin to the left side */
+            margin-right: 20px; /* Added margin to the right side */
         }
-        .add-to-cart-btn {
-            display: inline-block;
-            vertical-align: top; /* Align the top of the button with the top of the product image */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 -20px; /* Adjusted margin to accommodate for the added margins */
+        }
+
+        .left-section{
+            flex: 1;
+            padding: 0;
+        }
+        .center-section{
+            flex: 1;
+            padding: 0px; 
+        }
+        .right-section {
+            flex: 1;
+            padding: 0 5px;   
+        }
+
+
+        .product-image {
+            margin-top: 3px;
+            margin-left: 0; 
+            height: 700px;
+            transition: transform 0.3s ease; /* Smooth transition for the zoom effect */
+            object-fit: contain; /* Ensure the entire image fits within the dimensions */
+            width: 600px;
+            
+        }
+
+        .product-image:hover {
+            cursor: pointer;
+        }
+        
+        .add-to-cart-btn{
+            margin-top: 20px;
+            display: block;
+            color: #fff;
+            background-color: #51850e;
+            margin: 10px auto;
+            width: 320px;
+            padding: 12px;
+
+        }
+        .add-to-cart-btn:hover{
+            background-color:#acee55;
+            color: black;
+        }
+        .buy{
+            margin-top: 20px;
+            display: block;
+            color: #fff;
+            background-color: #050505;
+            margin: 10px auto;
+            width: fit-content;
+            padding: 12px 125px;
+
+        }
+        .Checkout{
+            margin-top: 20px;
+            display: block;
+            color: #070707;
+            background-color: #b8b5b5;
+            margin-top: 450px;
+            width: fit-content;
+            padding: 10px 150px;  
         }
         .order-whatsapp-btn {
-          display: block;  
-          margin-top: 20px; /* Add some space between the Add to Cart and Order on WhatsApp buttons */
+            margin-top: 20px;
+            display: block;
+            color: #fff;
+            margin: 10px auto;
+            width: 320px;
+            padding: 12px;
         }
         
-    </style></head>
+        .pm-1{
+            margin-left: 0px;
+            margin-top: 50px;
+            height: 100px;
+            display:block;
+            border-radius: 5px;
+        }
+        .pm-1:hover{
+            cursor:pointer;
+        }
+        /* Styles for the dialog */
+        .dialog {
+            display: none; /* Hide dialog by default */
+            position: fixed;
+            top: 50%;
+            right: 0%;
+            height: 100%;
+            width: calc(50% + 50vw); /* Adjusted width to cover from half the HTML page to the whole right side */
+            max-width: 400px; /* Added max-width to limit the width */
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000; /* Ensure the dialog appears on top */
+        }
+        
+        /* Styles for the close button */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+        .dialog-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .product-details {
+            flex: 1;
+            padding-right: 20px; /* Add some spacing between details and image */
+        }
+
+        .product-image-container {
+            flex: 1;
+            text-align: center;
+        }
+
+        .product-image-dialog {
+             max-width: 150px;
+             max-height: 200px;
+        }   
+        .custom-ms{
+            margin-left: 70px;
+            margin-top: 50px;
+        }
+        .size-buttons {
+            flex-wrap: wrap;
+        }
+        .size-btn {
+            padding: 10px 20px;
+            border: 1px solid black;
+            background-color: white;
+            cursor: pointer;
+        }
+        .size-btn.selected {
+            background-color: black;
+            color: white;
+        } 
+        .price{
+            display: flex;
+            gap: 50px;
+        }
+            
+                
+          
+        
+        
+    </style>
+</head>
 <body>
     <div class="container">
-    <div class="product-detail">
-        <img src="{{ product.image.url }}" alt="{{ product.name }}">
-        <h2>{{ product.name }}</h2>
-        <p>{{ product.description }}</p>
-        <p>Price: ksh {{ product.price }}</p>
+        <!-- Left Section -->
+    <div class="left-section text-center" style="background-color: #ece8e8;">
+             <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Westside</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Collection</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Men</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Women</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+            <div class="product-images">
+                {% if product.image2 %}
+                <img src="{{ product.image2.url }}" alt="{{ product.name }}" class=" pm-1" onclick="changeImage(this)">
+                {% endif %}
 
-        <!-- Add to Cart button -->
-        <button onclick="addToCart('{{ product.id }}', '{{ product.name }}', '{{ product.price }}')" class="btn btn-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-dash" viewBox="0 0 16 16">
-                <path d="M6.5 7a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1z"/>
-                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
-              </svg> Add to Cart
-        </button>
-        <!-- Order on WhatsApp button -->
-          <!-- Order on WhatsApp button -->
-          <button class="order-whatsapp-btn btn btn-success" onclick="orderOnWhatsApp('{{ product.name }}', '{{ product.price }}')">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
-                <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
-              </svg> Order on WhatsApp
-        </button>        
-    </div>  
+                {% if product.image3 %}
+                <img src="{{ product.image3.url }}" alt="{{ product.name }}" class=" pm-1" onclick="changeImage(this)">
+                {% endif %}
+
+                {% if product.image4 %}
+                <img src="{{ product.image4.url }}" alt="{{ product.name }}" class="pm-1" onclick="changeImage(this)">
+                {% endif %}
+
+                {% if product.image5 %}
+                <img src="{{ product.image5.url }}" alt="{{ product.name }}" class=" pm-1" onclick="changeImage(this)">
+                {% endif %}
+
+
+            </div>
+        </div>
         
+        <!-- Center Section -->
+        <div class="center-section text-center">
+            <div class="product-images">
+                <img src="{{ product.image1.url }}" alt="{{ product.name }}" class="product-image" id="mainImage">
+            </div>
+        </div>
+        
+         <!-- Right Section -->
+         <div class="right-section d-flex flex-column justify-content-center custom-ms">
+            <h2 style="font-size: 25px;">{{ product.name }}</h2>
+            <hr style="width: 100%; margin-top: 5px; margin-bottom: 15px; border-top: 1px solid black;">
+            <div class="price">
+            <p style="color: rgb(253, 8, 8); font-size: 17px; text-decoration: line-through;">ksh {{ product.original_price }}</p>
+            <p style="color: rgb(12, 0, 0); font-size: 17px;">ksh {{ product.selling_price }}</p>
+            </div>
+            <h2 style="font-size: 15px;">{{ product.description }}</h2>
+
+            <div class="size-buttons">
+                <p>Available Sizes:</p>
+                {% for size in sizes %}
+                    <button class="btn size-btn" onclick="selectSize('{{ size }}')" style="margin-right: 10px; margin-bottom: 10px;">
+                        {{ size }}
+                    </button>
+                {% endfor %}
+            </div>
+            <input type="hidden" id="selected-size" name="selected-size" value="">
+
+            <!-- Quantity Selection -->
+            <label for="quantity" style="margin-top: 10px;">Product Quantity:</label>
+            <input type="number" id="quantity" name="quantity" class="form-control" style="width: 100px; margin-bottom: 20px;" min="1" value="1">
+            <button onclick="openDialog('{{ product.name }}', '{{ product.price }}', '{{ product.selling_price }}')" class="btn add-to-cart-btn buy" style="margin-top: 30px;">
+                Buy now
+            </button>
+
+            <form method="post" action="{% url 'add_to_cart' product.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn add-to-cart-btn">Add to Cart</button>
+            </form> 
+                      
+        </div>
     </div>
 
+    <!-- Dialog -->
+    <div class="dialog" id="cartDialog">
+        <button class="close-btn" onclick="closeDialog()">X</button>
+        <div class="dialog-content">
+            <div class="product-details">
+                <h3 id="dialogProductName"></h3>
+                <p id="dialogProductPrice"></p>
+                <p id="dialogProductSellingPrice"></p>
+                <p id="dialogProductSize"></p>
+                <p id="dialogProductQuantity"></p>
+            </div>
+            <div class="product-image-container">
+                <img src="{{ product.image1.url }}" alt="{{ product.name }}" class="product-image-dialog">
+            </div>
+        </div>
+        <a href="{%url 'checkout' %}">
+        <button id="checkoutBtn" class="btn btn-primary" style="background-color: #050505;">Proceed to Checkout</button>
+        </a>
+    </div>
+    <!-- Your existing JavaScript code -->
+    <script>
+         // JavaScript for the main image change on hover
+         document.addEventListener("DOMContentLoaded", function() {
+            const mainImage = document.getElementById("mainImage");
+            const thumbnails = document.querySelectorAll(".pm-1");
 
-     <!-- Your existing JavaScript code -->
-     <script>
-        // Function to add product to cart
-        function addToCart(productId, productName, productPrice) {
-            // Implement your add to cart logic here
-            // For example, you can use JavaScript to add the product to the cart
-            alert("Added '" + productName + "' to cart. Price: " + productPrice);
+            let originalImageSrc = mainImage.src;
+
+            thumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener("mouseenter", function() {
+                    mainImage.src = this.src;
+                });
+
+                thumbnail.addEventListener("mouseleave", function() {
+                    mainImage.src = originalImageSrc;
+                });
+            });
+        });
+    
+        function openDialog(productName, productPrice, sellingPrice) {
+            // Get the quantity value
+            const quantity = document.getElementById('quantity').value;
+            
+            // Get the selected size
+            const selectedSize = document.getElementById('selected-size').value;
+
+            // Display product details in the dialog
+            document.getElementById('dialogProductName').innerText = productName;
+            document.getElementById('dialogProductSellingPrice').innerText = 'Ksh ' + sellingPrice;
+            document.getElementById('dialogProductSize').innerText = 'Size: ' + selectedSize;
+            document.getElementById('dialogProductQuantity').innerText = 'Quantity: ' + quantity;
+
+            // Show the dialog
+            document.getElementById('cartDialog').style.display = 'block';
         }
 
-        // Function to order on WhatsApp
-        function orderOnWhatsApp(productName, productPrice) {
-            // Implement your order on WhatsApp logic here
-            // For example, you can open a WhatsApp chat with pre-filled message
-            var message = "I would like to order '" + productName + "' for ksh " + productPrice;
-            var whatsappURL = "https://web.whatsapp.com/" + encodeURIComponent(message);
-            window.open(whatsappURL, "_blank");
+        function closeDialog() {
+            // Hide the dialog
+            document.getElementById('cartDialog').style.display = 'none';
         }
+
+        function changeImage(element) {
+            var mainImage = document.getElementById('mainImage');
+            mainImage.src = element.src;
+        }
+
+        function selectSize(size) {
+            // Update the hidden input value with the selected size
+            document.getElementById('selected-size').value = size;
+
+            // Remove 'selected' class from all size buttons
+            var sizeButtons = document.getElementsByClassName('size-btn');
+            for (var i = 0; i < sizeButtons.length; i++) {
+                sizeButtons[i].classList.remove('selected');
+            }
+
+            // Add 'selected' class to the clicked button
+            var clickedButton = Array.prototype.filter.call(sizeButtons, function(button) {
+                return button.innerText === size;
+            })[0];
+            clickedButton.classList.add('selected');
+        }
+        
     </script>
+    
+    
 </body>
 </html>

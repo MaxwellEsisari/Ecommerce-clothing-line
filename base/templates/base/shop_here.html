@@ -7,33 +7,82 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+        nav {
+            width: 100%;
+            background-color:#fdfdfd;
+            color: rgb(15, 15, 15);
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Ensure navigation bar stays on top */
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 10px 0px;
+            display: flex;
+            justify-content: flex-start; /* Align items to the left */
+        }
+
+        nav ul li {
+            margin-right: 20px; /* Adjust spacing between items */
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: rgb(85, 83, 65);
+            font-weight: normal;
+            padding: 0px 10px;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #fdfdfd;
+        }
+
         .product-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: flex-start;
             margin-bottom: 20px; /* Optional: add margin between rows */
-            margin-left: 140px;
+            margin-left: 40px;
         }
         .product-card {
-            width: calc(33.33% - 70px); /* Adjust as needed depending on the number of products you want to display in a row */
+            width: calc(25% - 20px); /* Adjusted width to fit 4 items in a row */
             margin-bottom: 20px; /* Optional: add margin between products */
-            margin-right: 30px; /* Adjust the right margin to reduce spacing between product cards */
+            margin-right: 20px; /* Adjust the right margin to reduce spacing between product cards */
             /* You can add additional styling for the product card here */
+            box-shadow: 0px 4px 8px rgba(5, 5, 5, 0.1); /* Add shadow for depth */
         }
         .product-card:last-child {
             margin-right: 0; /* Remove the right margin for the last product card in each row */
         }
         h2.category {
-            margin-left: 140px; /* Add a margin to the left side of the category headings */
+            margin-left: 40px;
+            margin-top: 40px;
+            font-size: 18px;
         }
+
+        .card-img-top{
+            height: 500px;
+        }
+        .card-title{
+            margin-top: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            margin-left: 20px;
+        }
+
         .product-card .image-container {
             position: relative;
-            width: 350px; /* Adjust the width of the image container */
+            width: 300px; /* Adjust the width of the image container */
             height: auto; /* Maintain aspect ratio */
             margin-left: 20px;
             margin-top: 15px;
-            border-radius: 8px; /* Add border-radius for rounded corners */
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+            /* box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); Add shadow for depth */
             overflow: hidden; /* Hide overflow content (image2) */
         }
         .product-card .image-container img {
@@ -52,6 +101,7 @@
             left: 0;
             opacity: 0; /* Initially hidden */
             transition: opacity 0.3s ease; /* Smooth transition effect for opacity */
+            cursor: pointer;
         }
         .product-card .image-container:hover img.hover-image {
             opacity: 1; /* Show image2 when hovering over image1 */
@@ -60,7 +110,7 @@
             color: #524e4d; /* Set the text color to orange */
             font-weight: bold; /* Set the font weight to bold */
             font-style:oblique;
-            font-size: 15px; /* Set the font size */
+            font-size: 12px; /* Set the font size */
         }
         /* Style for the cart button */
         .cart-container {
@@ -89,8 +139,8 @@
         }
         .favorite-icon {
             position: absolute;
-            top: 5px;
-            left:3px;
+            right:5px;
+            bottom: 10px;
             fill: red; /* Change color as needed */
             cursor: pointer;
         }
@@ -98,55 +148,63 @@
         .favorite-icon:hover {
             fill: rgb(51, 6, 6);
             }
+
+       .card-text{
+        margin-left: 20px;
+        margin-top: 5px;
+        padding-bottom: 5px;
+       }     
     </style>
 </head>
 <body>
+    <!-- <nav>
+        <ul>
+            <li><a href="{%url 'index'%}">Home</a></li>
+            <li><a href="{%url 'shop_here'%}">shop</a></li>
+            <li><a href="#">New Arrivals</a></li>
+            <li><a href="#">New Arrivals</a></li>
+            <li><a href="#">New Arrivals</a></li>
 
+        </ul>
+    </nav>  -->
+ 
     <div class="cart-container">
-        <div class="cart-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star favorite-icon" viewBox="0 0 16 16" onclick="addToFavorites('{{ product.id }}', '{{ product.name }}', '{{ product.description }}', '{{ product.image1.url }}', '{{ product.image2.url }}')">
-                <path d="M6.5 7a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1z"/>
-                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
-            </svg>
-            <sup id="cartCount" class="cart-count">0</sup>
-        </div>
+        
+        
     </div>
 
     {% for category, products in categories.items %}
-        <h2 class="category">{{ category }}</h2>
-        <div class="product-container">
-            {% for product in products %}
-                <div class="product-card">
-                    <div class="card mb-4 shadow-sm">
-                           <!-- Favorite icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star favorite-icon" viewBox="0 0 16 16" onclick="addToFavoritesAndRedirect('{{ product.id }}', '{{ product.name }}', '{{ product.description }}', '{{ product.image1.url }}')">
-                            <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/>
-                          </svg>
-                        <div class="image-container">
-                            <img src="{{ product.image1.url }}" class="card-img-top" alt="{{ product.name }}">
-                            {% if product.image2 %}
-                            <img src="{{ product.image2.url }}" class="hover-image" alt="{{ product.name }}">
-                            {% endif %}
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ product.name }}</h5>
-                            <p class="card-text" onclick="viewProductDetail('{{ product.id }}')">{{ product.description }}</p>
-                            <p class="card-text price"> ksh {{ product.price }}</p>
-                        <!-- Add to Cart button -->
-                        <button onclick="addToCart('{{ product.id }}', '{{ product.name }}', '{{ product.price }}')" class="btn btn-primary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-dash" viewBox="0 0 16 16">
-                                <path d="M6.5 7a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1z"/>
-                                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
-                            </svg> Add to Cart
-                        </button>                                      
-                    </div>
+    <h2 class="category">{{ category }}</h2>
+    <div class="product-container">
+        {% for product in products %}
+            <div class="product-card mb-4 shadow-sm">
+                <div class="image-container">
+                    <img src="{{ product.image1.url }}" class="card-img-top" alt="{{ product.name }}" onclick="viewProductDetail('{{ product.id }}', '{{ product.name }}', '{{ product.description }}', '{{ product.image1.url }}', '{% if product.image2 %}{{ product.image2.url }}{% endif %}', '{{ product.original_price }}')">
+                    {% if product.image2 %}
+                        <img src="{{ product.image2.url }}" class="hover-image" alt="{{ product.name }}" onclick="viewProductDetail('{{ product.id }}', '{{ product.name }}', '{{ product.description }}', '{{ product.image1.url }}', '{{ product.image2.url }}', '{{ product.original_price }}')">
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text price"> ksh {{ product.original_price}}</p>
+                    
                 </div>
             </div>
         {% endfor %}
     </div>
 {% endfor %}
+<script>
+  function viewProductDetail(productId, productName, productDescription, productImage1, productImage2, productPrice) {
+    var url = '/product/' + productId + '/';
+    url += '?name=' + encodeURIComponent(productName);
+    url += '&description=' + encodeURIComponent(productDescription);
+    url += '&image1=' + encodeURIComponent(productImage1);
+    url += '&image2=' + encodeURIComponent(productImage2);
+    url += '&price=' + encodeURIComponent(productPrice);
+    window.location.href = url;
+}
 
-
+</script>
 <script>
     function addToFavoritesAndRedirect(productId, productName, productPrice, productDescription, productImage1, productImage2) {
         // Create an object to store product data
@@ -175,6 +233,7 @@
 
 
 <script>
+    
     function addToCart(productId) {
     var formData = new FormData();
     formData.append('product_id', productId);

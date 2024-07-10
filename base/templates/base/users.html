@@ -1,0 +1,53 @@
+{% extends "partials/sidebar.html" %}
+{% load static %}
+
+{% block title %}Users{% endblock %}
+
+{% block content %}
+<style>
+    table {
+        width: 1240px;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    table th, table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    table th {
+        background-color: #f4f4f4;
+        font-size: 16px;
+    }
+   
+</style>
+<h1>Users</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Created Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.date_joined }}</td>
+            <td>
+                <a href="#">Edit</a> | 
+                <a href="#">Delete</a>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,235 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+
+        }
+        nav {
+            width: 100%;
+            background-color:#fdfdfd;
+            ;
+            color: rgb(15, 15, 15);
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Ensure navigation bar stays on top */
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 10px 0px;
+            display: flex;
+            justify-content: flex-start; /* Align items to the left */
+        }
+
+        nav ul li {
+            margin-right: 20px; /* Adjust spacing between items */
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: rgb(85, 83, 65);
+            font-weight: normal;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #fdfdfd;
+        }
+
+        .login-container {
+            padding: 20px;
+            width: 40%;
+            text-align: center;
+            background-color: #fff;
+        }
+
+        .image-container {
+            width: 60%;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form input {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+
+        form button {
+            padding: 10px;
+            background-color: #110838;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        form button:hover {
+            background-color: #fdfdfd;
+            color: rgb(0, 0, 0);
+            border: 1px solid black;
+        }
+
+        .signup-link {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            color: #5cb85c;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+        .about-card {
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            padding: 20px;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-family: Arial, sans-serif;
+            width: 100%;
+            flex-direction: column; /* Change to column layout */
+        }
+
+        .card1 h2 {
+            display: block; /* Ensures h2 uses default block layout */
+            text-align: center; /* Center text within h2 */
+            margin-bottom: 10px; /* Reset margins for h2 */
+            padding: 10px; /* Reset padding for h2 */
+            font-size: 28px; /* Adjust font size for h2 */
+        }
+
+        .card1 p {
+           display: block; /* Ensures p uses default block layout */
+           text-align: center; /* Center text within p */
+           margin-bottom: 15px; /* Reset margins for p */
+           padding: 0; /* Reset padding for p */
+           font-size: 15px; /* Adjust font size for p */
+        }       
+        .card1 {
+            margin-top: 100px;
+            height: 450px; /* Height of Card 1 */
+            width: 450px;
+            color: #151616;
+            background-color:#fff;
+            z-index: 2;
+        }
+
+
+        .card2 {
+            background-color: #fff;
+            width: 1000px;
+            color: white;
+            height: 600px; /* Height of Card 2 */
+            z-index: 1;
+        }
+
+        /* Position the containers to create the overlapping effect */
+        .card1-container {
+            position: absolute;
+            top: 50px;
+            left: 30px;
+        }
+
+        .card2-container {
+            position: absolute;
+            top: 100px;
+            left: 150px;
+        }
+        form input[type="text"],
+        form input[type="password"],
+        form input[type="email"] {
+            background-color: rgb(245, 241, 241);
+            width: 300px;
+        }
+        
+        
+        
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{%url 'index'%}">Home</a></li>
+            <li><a href="{%url 'shop_here'%}">shop</a></li>
+            <li><a href="#">New Arrivals</a></li>
+            <li><a href="#">New Arrivals</a></li>
+            <li><a href="#">New Arrivals</a></li>
+
+            <!-- Add more links as needed -->
+        </ul>
+    </nav> 
+
+   <div class="about-container">
+        <div class="about-card-container card1-container">
+            <div class="about-card card1">       
+                <p style="font-size: 23px; font-style: normal;">LOG INTO YOUR ACCOUNT</p>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Login</button>
+
+                    <div class="p" style="display: flex; justify-content: space-between; margin-top: 10px;">
+
+                    <p><a href="#" style="text-decoration: none; color: #373a3a;">Forgotten password?</a></p>
+
+                    </div>
+                    <div class="p" style="display: flex; justify-content: space-between; margin-top: 0px;">
+                    <p> Don't have an account? <a href="{% url 'signup' %}" style="text-decoration: none; color:#373a3a ; border-bottom: 1px solid black;">signup</a></p>
+                    </div>
+
+
+                    <!-- Display errors if any -->
+
+
+                </form>
+            </div>
+        </div>
+        <div class="about-card-container card2-container">
+            <div class="about-card card2">
+              <img src="{% static 'images/fav5.webp' %}" alt="image" class="card__img">
+            </div>
+      
+        </div>
+      </div>
+</body>
+</html>

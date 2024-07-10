@@ -1,5 +1,5 @@
 <!-- main.html -->
-<!DOCTYPE html>
+
 {% load static %}
 
 <html lang="en">
@@ -86,141 +86,207 @@
     outline: none; /* Remove default focus outline */
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add box shadow on focus */
 }
+.nav__link {
+    --spacing: 1em;
+    text-decoration: none;
+    color: rgb(165, 161, 161);
+    display: inline-block;
+    padding: calc(var(--spacing) / 2) var(--spacing);
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: Noto Sans, sans-serif;
+    font-size: 0.9rem;
 
+  }
+  .site-logo {
+    font-size: 1.5rem;
+    color: rgb(165, 161, 161);
+    text-decoration: none;
+  }
+  @keyframes reveal-text {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .reveal-text {
+    animation: reveal-text 6s ease-out forwards;
+  }
+  .hide-navbar {
+    display: none;
+  }
+  .delivery-message {
+      background-color: #646664; /* Green background color */
+      color: rgb(187, 171, 171); /* White text color */
+      text-align: center; /* Center align text */
+      padding: 5px; /* Padding around content */
+      font-size: 14px; /* Font size */
+  }
+  
+
+
+
+
+  
 
 
 </style>
     
 </head>
 <body>
-    <div class="nav-header">
-        <header>
-                        
-                  <div class="header-item item-left">
-                  <a href="#" class="site-logo" aria-label="homepage">WestsideLooks</a>
-                 </div>
-                
-                <!-- menu starts here -->
-                <div class="header-item item-center">
-                  <div class="menu-overlay">
-                  </div>
-                  <nav class="menu">
-                    <ul class="nav__list">
-                       <li>
-                        <a class="nav__link" href="{% url 'upload_arrival_product' %}">+</a>
-                         </li>
-                      <li class="nav__list-item menu-item-has-children">
-                        <a class="nav__link" href="#">New Arrivals</a>
-                        <div class="sub-menu mega-menu mega-menu-column-4 horizontal-display">
-                          <div class="list-item text-center">
-                              {% for product in arrival_products %}
-                              <div class="product">
-                                  <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
-                                  <div class="product-info">
-                                      <div class="product-title">{{ product.product_name }}</div>
-                                      <div class="product-price">ksh {{ product.product_price }}</div>
-                                  </div>
-                              </div>
-                              {% empty %}
-                              <p>No arrival products available.</p>
-                              {% endfor %}
-                          </div>
-                      </div>
-                      </li>
-                      <li class="nav__list-item menu-item-has-children">
-                        <a class="nav__link" href="#">shop <i class="fa fa-angle-down"></i></a>
-                           <div class="sub-menu mega-menu mega-menu mega-menu-column-4">
-                             
-                              <div class="list-item">
-                                 <h4 class="title">Men's fashion</h4>
-                                   <ul>
-                                      <li><a href="#">Tops</a></li>
-                                      <li><a href="#">Bottoms</a></li>
-                                      <li><a href="#">Outerwear</a></li>
-                                      <li><a href="#">Accessories</a></li>
-                                      <li><a href="#">Suits</a></li>
-                                      <li><a href="#">Footwear</a></li>
-                                      <li><a href="#">Undergarments</a></li>
+  {% include 'partials/topnav.html' %}
+    <div class="nav-header" id="navbar"> 
 
-                                   </ul>
-                              </div>
-                              <div class="list-item">
-                                <h4 class="title">women's fashion</h4>
+         <header> 
+            <div class="header-item item-left reveal-text">
+            <a href="#" class="site-logo" aria-label="homepage">WestsideLooks</a>
+          </div>
+          
+          <!-- menu starts here -->
+          <div class="header-item item-center reveal-text">
+            <div class="menu-overlay">
+            </div>
+            <nav class="menu">
+              <ul class="nav__list">
                 
-                                <ul>
-                                  <li><a href="#">Tops</a></li>
-                                  <li><a href="#">Dressess</a></li>
-                                  <li><a href="#">Bottoms</a></li>
-                                  <li><a href="#"> Outerwear</a></li>
-                                  <li><a href="#">Sneakers</a></li>
-                                  <li><a href="#">Activewear</a></li>
-                               </ul>
-                
-                              </div>
-                              <div class="list-item">
-                                <h4 class="title">kid's fashion</h4>
-                                <ul>
-                                  <li><a href="#">Tops</a></li>
-                                  <li><a href="#">Bottoms</a></li>
-                                  <li><a href="#">Outerwear</a></li>
-                                  <li><a href="#">Sneakers</a></li>
-                               </ul>
-                              </div>
-                              
-                
-                              <div class="list-item">
-                                <img src="{% static 'images/download.jpeg' %}" alt="shop">
-                              </div>
-                
-                
-                            
-                           </div>
-                      </li>
-                     
-                      <li class="nav__list-item menu-item-has-children">
-                        <a class="nav__link" href="#">Help <i class="fa fa-angle-down"></i></a>
-                           <div class="sub-menu single-column-menu">
-                             <ul>
-                               <li><a href="#">standard layout</a></li>
-                               <li><a href="#">standard layout</a></li>
-                               <li><a href="#">standard layout</a></li>
-                             </ul>
-                           </div>
-                      </li>
-                        
-                  
-                      <li class="nav__list-item menu-item-has-children">
-                        <a href="#" class="nav__link">Search</a>
-                        <div class="sub-menu input-box">
-                            <input type="text" placeholder="Search" class="search-input">
+                <li class="nav__list-item menu-item-has-children">
+                  <a class="nav__link" href="#">New Arrivals</a>
+                  <div class="sub-menu mega-menu mega-menu-column-4 horizontal-display">
+                    <div class="list-item text-center">
+                        {% for product in arrival_products %}
+                        <div class="product">
+                            <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
+                            <div class="product-info">
+                                <div style="font-size: 13px;">{{ product.product_name }}</div>
+                                <div style="font-size: 13px; color: #888;">ksh {{ product.product_price }}</div>
+                            </div>
                         </div>
-                    </li>
-                    </ul>
-                  </nav>
-                </div>  
-                
-                <div class="header-item item-right">
-                  <nav class="account">
-                    <ul class="nav__list">
-                      <li class="nav__list-item">
-                        <a class="nav__link nav__link--btn" href="login.html">Login</a>
-                      </li>
-                      <li class="nav__list-item">
-                        <a
-                          class="nav__link nav__link--btn nav__link--btn--highlight"
-                          href="join.html"
-                          >join</a >
-                      </li>
-                      <div class="mobile-menu-trigger">
-                        <span></span>
-                      </div>
-                
-                    </ul>
-                  </nav>
+                        {% empty %}
+                        <p>No arrival products available.</p>
+                        {% endfor %}
+                    </div>
                 </div>
+                </li>
+                <li class="nav__list-item menu-item-has-children">
+                  <a class="nav__link" href="#">shop <i class="fa fa-angle-down"></i></a>
+                    <div class="sub-menu mega-menu mega-menu mega-menu-column-4">
+                      
+                        <div class="list-item">
+                          <h4 class="title">Men's fashion</h4>
+                            <ul>
+                                <li><a href="#">Tops</a></li>
+                                <li><a href="#">Bottoms</a></li>
+                                <li><a href="#">Outerwear</a></li>
+                                <li><a href="#">Accessories</a></li>
+                                <li><a href="#">Suits</a></li>
+                                <li><a href="#">Footwear</a></li>
+                                <li><a href="#">Undergarments</a></li>
+
+                            </ul>
+                        </div>
+                        <div class="list-item">
+                          <h4 class="title">women's fashion</h4>
+          
+                          <ul>
+                            <li><a href="#">Tops</a></li>
+                            <li><a href="#">Dressess</a></li>
+                            <li><a href="#">Bottoms</a></li>
+                            <li><a href="#"> Outerwear</a></li>
+                            <li><a href="#">Sneakers</a></li>
+                            <li><a href="#">Activewear</a></li>
+                        </ul>
+          
+                        </div>
+                        <div class="list-item">
+                          <h4 class="title">kid's fashion</h4>
+                          <ul>
+                            <li><a href="#">Tops</a></li>
+                            <li><a href="#">Bottoms</a></li>
+                            <li><a href="#">Outerwear</a></li>
+                            <li><a href="#">Sneakers</a></li>
+                        </ul>
+                        </div>
+                        
+          
+                        <div class="list-item">
+                          <img src="{% static 'images/download.jpeg' %}" alt="shop">
+                        </div>
+          
+          
+                      
+                    </div>
+                </li>
+              
+                <li class="nav__list-item menu-item-has-children">
+                  <a class="nav__link" href="#">Help <i class="fa fa-angle-down"></i></a>
+                    <div class="sub-menu single-column-menu">
+                      <ul>
+                        <li><a href="#">standard layout</a></li>
+                        <li><a href="#">standard layout</a></li>
+                        <li><a href="#">standard layout</a></li>
+                      </ul>
+                    </div>
+                </li>
                   
-            {% block navbar %}{% endblock %}
-        </header>
+            
+                <!-- <li class="nav__list-item menu-item-has-children">
+                  <div class="search-box">
+                    <input style="border: 1px solid rgb(202, 113, 5);" type="text"  name="" placeholder="Search here!">
+                    
+                </div>
+              </li> -->
+              </ul>
+            </nav>
+          </div>  
+          
+          <div class="header-item item-right reveal-text">
+            <nav class="account">
+              <ul class="nav__list" style="margin-right: 20px;">
+                
+                <!-- Other navigation items -->
+                {% if user.is_authenticated %}
+                
+                <li class="nav__list-item">
+                    <a href="#" style="color: rgb(78, 78, 78); margin-right: 10px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16" style="color: white; margin-right: 5px; text-decoration: none;">
+                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                      </svg>
+                      <span style="color: rgb(165, 161, 161)">{{ user.username }}</span>
+                    </a>
+                    
+                </li>
+               
+                {% else %}
+                    <!-- Show login link if user is not authenticated -->
+                    <li class="nav__list-item">
+                      
+                        <a href="{% url 'login' %}" title="Join" style="color: black; border-bottom: 1px solid black;">
+                            Login
+                        </a>
+                    </li>
+                {% endif %}
+
+                <li class="nav__list-item" >
+                  <a href="{%url 'login' %}" style="color: rgb(165, 161, 161); margin-left: 15px; padding: 1px 5px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16"style="color: rgb(165, 161, 161); margin-right: 6px;text-decoration: none;">
+                      <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+                    </svg>cart
+                    <span class="badge  text-white ms-1 rounded-pill" style="padding-top: 3px ;padding-bottom: 3px; background: rgb(165, 161, 161);text-decoration: none;">0</span>
+                  </a>
+                </li>
+                
+              </ul>
+            </nav>
+          </div>
+            
+      {% block navbar %}{% endblock %}
+    </header>
     </div>
 
         <!-- Shared content -->
@@ -229,5 +295,36 @@
     </div>
 
     <script src="{% static 'js/observers.js' %}"></script>
-</body>
+   <script>
+          // Select the navbar element
+        const navbar = document.getElementById('navbar');
+
+        // Define the height at which you want the navbar to disappear
+        const scrollHeightToHide = 200; // Adjust this value as needed
+
+        // Function to handle scroll event
+        function handleScroll() {
+            if (window.scrollY > scrollHeightToHide) {
+                navbar.classList.add('hide-navbar'); // Add a class to hide the navbar
+            } else {
+                navbar.classList.remove('hide-navbar'); // Remove the class to show the navbar
+            }
+        }
+
+        // Add scroll event listener
+        window.addEventListener('scroll', handleScroll);
+
+   </script>
+    <script>
+      // JavaScript function to hide or show the delivery message div
+      function toggleDeliveryMessage() {
+          var deliveryMessage = document.getElementById('delivery-message');
+          if (deliveryMessage.style.display === 'none') {
+              deliveryMessage.style.display = 'block';
+          } else {
+              deliveryMessage.style.display = 'none';
+          }
+      }
+  </script>
+  </body>
 </html>
